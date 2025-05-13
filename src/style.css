@@ -1,0 +1,83 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    background-color: rgb(23, 23, 23); 
+    color: rgb(239, 239, 239); 
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    min-height: 100vh; 
+    padding: 20px; 
+    box-sizing: border-box; 
+}
+
+.page-container {
+    width: 100%;
+    max-width: 60%; /* Максимальна ширина основного контейнера */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.headerlogo {
+    margin-bottom: 60px; /* Відступ під логотипом */
+    text-align: center;
+}
+
+.logo {
+    max-width: 200px; /* Розмір логотипу, налаштуйте за потребою */
+    height: auto;
+}
+
+.main-content {
+    width: 100%;
+}
+
+.hero-section {
+    width: 100%;
+}
+
+.text-block {
+    background-color: rgb(94, 91, 91); 
+    padding: 30px 35px; 
+    border-radius: 25px; 
+    text-align: center; 
+    
+    /* Внутрішня тінь */
+    /* Зміщення-X, зміщення-Y, розмиття, поширення, колір, inset */
+    box-shadow: inset 0px 0px 15px 0px rgba(0, 0, 0, 0.65); 
+    
+    width: 100%;
+    box-sizing: border-box; 
+}
+
+.text-block h1 {
+    color: rgb(239, 239, 239); 
+    font-size: 60px; /* Розмір заголовка, налаштуйте */ 
+    margin-top: 10px;
+    margin-bottom: 20px; 
+    font-weight: 500; /* Жирність заголовка */
+}
+
+.text-block p {
+    color: rgb(239, 239, 239); 
+    font-size: 47px; /* Розмір тексту */
+    line-height: 1.6; 
+    margin-bottom: 30px; 
+    font-weight: 300; /* Стандартна жирність */
+}
+
+.green-button {
+    background-color: #0F5011; 
+    color: rgb(239, 239, 239); 
+    border: none;
+    padding: 30px 150px; 
+    font-size: 40px; /* Розмір тексту на кнопці */
+    font-weight: 550; /* Жирний текст на кнопці */
+    border-radius: 50px; /* Радіус заокруглення кнопки */
+    cursor: pointer;
+    margin-top: 20px;
+}
+
