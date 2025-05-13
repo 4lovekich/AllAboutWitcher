@@ -79,5 +79,10 @@ body {
     border-radius: 50px; /* Радіус заокруглення кнопки */
     cursor: pointer;
     margin-top: 20px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; 
 }
 
+.green-button:hover {
+    transform: scale(1.05); 
+    background-color: #1a6a1c; 
+}
