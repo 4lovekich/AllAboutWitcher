@@ -20,6 +20,8 @@ button {
     --section-padding: 50px;
     --color-dark-rgb: 0, 0, 0;
     --color-black: #000000;
+    --card-background: rgba(255, 255, 255, 0.1); /* Напівпрозорий фон для карток */
+    --card-border-radius: 15px; /* Заокруглені кути карток */
 }
 
 
@@ -29,15 +31,28 @@ button {
     overflow: hidden;
 }
 
-.parallax__header,
-.parallax__content {
+.parallax__header {
+    min-height: 100svh;
     padding: var(--section-padding) var(--container-padding);
     justify-content: center;
     align-items: center;
-    min-height: 100svh;
     display: flex;
     position: relative;
+    overflow: hidden;
 }
+
+.parallax__content {
+    position: relative;
+    z-index: 50;
+    background-color: var(--color-neutral-900);
+    padding: var(--section-padding) var(--container-padding);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    min-height: auto;
+}
+
 
 .parallax__visuals {
     object-fit: cover;
@@ -47,6 +62,7 @@ button {
     position: absolute;
     top: 0;
     left: 0;
+    z-index: 1;
 }
 
 .parallax__layers {
@@ -58,6 +74,7 @@ button {
     top: 0;
     left: 0;
     overflow: hidden;
+    z-index: 1;
 }
 
 .parallax__layer-img {
@@ -85,6 +102,7 @@ button {
     position: absolute;
     top: 0;
     left: 0;
+    z-index: 2;
 }
 
 .parallax__title {
@@ -93,7 +111,7 @@ button {
     text-transform: none;
     margin: 0 0 .1em .075em;
     font-family: 'Montserrat', sans-serif;
-    font-size: 9.5vw; /* Розмір шрифту, налаштуйте */
+    font-size: 9.5vw;
     font-weight: 800;
     line-height: 1;
     position: relative;
@@ -143,25 +161,26 @@ button {
 
 
 .main-nav {
-    position: absolute;
+    position: absolute; 
     top: 0;
     left: 0;
-    width: 98%; /* ось це напевно буде погано коли буду адаптивність робити */
+    width: 98%; 
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px 20px; 
     z-index: 100; 
+ 
 }
 
 .nav-logo img {
-    height: 80px; 
+    height: 80px; /* Збільшена висота, як ти просив */
     width: auto;
 }
 
 .nav-buttons {
     display: flex;
-    gap: 20px; /* Відстань між кнопками */
+    gap: 20px;
 }
 
 .icon-button {
@@ -172,6 +191,178 @@ button {
 }
 
 .icon-button img {
-    height: 60px; /* Розмір іконок, налаштуйте за потреби */
+    height: 60px; /* Збільшена висота, як ти просив */
     width: auto;
+}
+
+/* Стилі для секції персонажів (без змін, оскільки вони не були у запиті) */
+.characters-section {
+    padding-top: 80px;
+    padding-bottom: 80px;
+    justify-content: flex-start;
+}
+
+.section-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3.5vw;
+    font-weight: 600;
+    color: var(--color-light);
+    margin-bottom: 60px;
+    text-align: center;
+    position: relative;
+    z-index: 60;
+}
+
+.section-title::before,
+.section-title::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 10vw;
+    height: 2px;
+    background-color: var(--color-light);
+    transform: translateY(-50%);
+}
+
+.section-title::before {
+    left: calc(50% - 3.5vw - 10vw);
+}
+
+.section-title::after {
+    right: calc(50% - 3.5vw - 10vw);
+}
+
+
+.characters-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    z-index: 60;
+}
+
+.character-card {
+    background-color: var(--card-background);
+    border-radius: var(--card-border-radius);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.character-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+.character-img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: var(--card-border-radius) var(--card-border-radius) 0 0;
+}
+
+.character-info {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--color-light);
+}
+
+.character-name {
+    margin: 0;
+    font-size: 1.5vw;
+    font-weight: 500;
+}
+
+.character-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #007bff;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.character-link:hover {
+    background-color: #0056b3;
+}
+
+.arrow-icon {
+    width: 20px;
+    height: 20px;
+    filter: invert(100%);
+}
+
+.more-characters-card {
+    background-color: #f0f0f0;
+    color: var(--color-neutral-900);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+}
+
+.more-characters-card .character-link {
+    background-color: #333;
+}
+
+.more-characters-card .character-link:hover {
+    background-color: #555;
+}
+
+.more-characters-card .arrow-icon {
+    filter: none;
+}
+
+.more-text {
+    font-size: 1.8vw;
+    font-weight: 600;
+    margin-bottom: 20px;
+    padding: 0 20px;
+}
+
+/* Медіа-запити для адаптивності */
+@media (max-width: 992px) {
+    .characters-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .characters-grid {
+        grid-template-columns: 1fr;
+    }
+    .section-title {
+        font-size: 6vw;
+    }
+    .section-title::before,
+    .section-title::after {
+        width: 5vw;
+    }
+    .character-name {
+        font-size: 4vw;
+    }
+    .more-text {
+        font-size: 5vw;
+    }
+    /* Залишаємо ці стилі для адаптивності навігації, враховуючи нові розміри */
+    .main-nav {
+        padding: 15px 15px; /* Зменшення padding для мобільних, щоб 98% ширини було прийнятним */
+        width: calc(100% - 30px); /* Щоб компенсувати padding і не виходити за 98% */
+    }
+    .nav-logo img {
+        height: 60px; /* Зменшення розміру лого для мобільних */
+    }
+    .icon-button img {
+        height: 40px; /* Зменшення розміру іконок для мобільних */
+    }
 }
