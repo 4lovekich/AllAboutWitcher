@@ -196,8 +196,6 @@ button {
 .icon-button img {
     height: 60px;
     width: auto;
-    /* Фільтр invert прибрано згідно з твоїм запитом */
-    /* filter: invert(100%); */
 }
 
 /* Стилі для секції персонажів */
@@ -359,31 +357,173 @@ button {
     border-radius: var(--card-border-radius); /* Заокруглені кути для самого зображення */
 }
 
+/* НОВІ СТИЛІ для секції Міні ігри */
+.mini-games-section {
+    padding-top: var(--section-padding);
+    padding-bottom: var(--section-padding);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: var(--color-neutral-900);
+    position: relative;
+    z-index: 50;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.mini-games-section-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3.5vw;
+    font-weight: 400;
+    color: var(--color-light);
+    margin-bottom: 100px;
+    text-align: center;
+    position: relative;
+    z-index: 60;
+    padding: 0 var(--container-padding);
+}
+
+.mini-games-container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    z-index: 60;
+}
+
+.mini-game-card {
+    display: block;
+    position: relative;
+    width: 50%;
+    height: 400px;
+    overflow: hidden;
+    border-radius: 0;
+    box-shadow: none;
+    text-decoration: none;
+    color: var(--color-light);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: #333;
+}
+
+.mini-game-card:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+.mini-game-card .game-background-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.8; /* Зменшуємо прозорість для кращої читабельності тексту, як на зображенні */
+    transition: opacity 0.3s ease;
+}
+
+.mini-game-card:hover .game-background-img {
+    opacity: 1; /* Повна прозорість при наведенні */
+}
+
+.mini-game-card .game-background-img-2 {
+    opacity: 0; /* Друге зображення приховано за замовчуванням */
+}
+
+.mini-game-card:hover .game-background-img-1 {
+    opacity: 0; /* Перше зображення зникає при наведенні */
+}
+
+.mini-game-card:hover .game-background-img-2 {
+    opacity: 1; /* Друге зображення з'являється при наведенні */
+}
+
+.card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column; /* Змінено на column, щоб заголовок був по центру без стрілок */
+    justify-content: center; /* Центруємо заголовок вертикально */
+    align-items: center; /* Центруємо заголовок горизонтально */
+    padding: 0; /* Прибираємо padding, оскільки стрілок немає */
+    z-index: 2;
+    transition: background-color 0.3s ease;
+}
+
+.mini-game-card:hover .card-overlay {
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.game-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 4vw;
+    font-weight: 700;
+    color: var(--color-light);
+    text-align: center;
+    margin: 0;
+    flex-grow: 0; /* Прибираємо flex-grow, щоб заголовок не розтягувався */
+    padding: 0; /* Прибираємо padding */
+}
+
+/* Прибираємо стилі для стрілок, оскільки їх більше немає в HTML */
+/*
+.arrow-left, .arrow-right {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 4vw;
+    font-weight: 700;
+    color: var(--color-light);
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.mini-game-card:hover .arrow-left,
+.mini-game-card:hover .arrow-right {
+    opacity: 1;
+}
+*/
 
 /* Медіа-запити для адаптивності */
 @media (max-width: 992px) {
     .characters-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 40px; /* Зменшуємо gap для середніх екранів */
+        gap: 40px;
     }
     .section-title {
-        font-size: 5vw; /* Зменшуємо розмір заголовка */
+        font-size: 5vw;
     }
     .map-section-title {
-        font-size: 5vw; /* Зменшуємо розмір заголовка карти */
+        font-size: 5vw;
     }
+    .mini-games-container {
+        flex-direction: column;
+        gap: 0;
+    }
+    .mini-game-card {
+        width: 100%;
+        height: 300px;
+    }
+    .mini-games-section-title {
+        font-size: 5vw;
+    }
+    .game-title {
+        font-size: 6vw;
+    }
+
 }
 
 @media (max-width: 768px) {
     .characters-grid {
         grid-template-columns: 1fr;
-        gap: 25px; /* Зменшуємо gap для мобільних */
+        gap: 25px;
     }
     .section-title {
         font-size: 6vw;
     }
     .map-section-title {
-        font-size: 6vw; /* Ще зменшуємо розмір заголовка карти */
+        font-size: 6vw;
     }
     .character-name {
         font-size: 4vw;
@@ -402,4 +542,11 @@ button {
     .icon-button img {
         height: 40px;
     }
+    .mini-games-section-title {
+        font-size: 6vw;
+    }
+    .game-title {
+        font-size: 7vw;
+    }
+
 }
