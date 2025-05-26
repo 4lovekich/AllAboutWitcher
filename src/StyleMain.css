@@ -20,7 +20,7 @@ button {
     --section-padding: 50px;
     --color-dark-rgb: 0, 0, 0;
     --color-black: #000000;
-    --card-background: rgba(255, 255, 255, 0.1); /* Напівпрозорий фон для карток */
+    --card-background: #ffffff; /* Білий фон для карток */
     --card-border-radius: 15px; /* Заокруглені кути карток */
 }
 
@@ -161,20 +161,20 @@ button {
 
 
 .main-nav {
-    position: absolute; 
+    position: absolute;
     top: 0;
     left: 0;
-    width: 98%; 
+    width: 98%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 20px; 
-    z-index: 100; 
- 
+    padding: 20px 20px;
+    z-index: 100;
+
 }
 
 .nav-logo img {
-    height: 80px; /* Збільшена висота, як ти просив */
+    height: 80px;
     width: auto;
 }
 
@@ -191,11 +191,13 @@ button {
 }
 
 .icon-button img {
-    height: 60px; /* Збільшена висота, як ти просив */
+    height: 60px;
     width: auto;
+    /* Фільтр invert прибрано згідно з твоїм запитом */
+    /* filter: invert(100%); */
 }
 
-/* Стилі для секції персонажів (без змін, оскільки вони не були у запиті) */
+/* Стилі для секції персонажів */
 .characters-section {
     padding-top: 80px;
     padding-bottom: 80px;
@@ -213,30 +215,13 @@ button {
     z-index: 60;
 }
 
-.section-title::before,
-.section-title::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    width: 10vw;
-    height: 2px;
-    background-color: var(--color-light);
-    transform: translateY(-50%);
-}
-
-.section-title::before {
-    left: calc(50% - 3.5vw - 10vw);
-}
-
-.section-title::after {
-    right: calc(50% - 3.5vw - 10vw);
-}
+/* Видалені псевдоелементи ::before та ::after для .section-title, оскільки вони були причиною полосок */
 
 
 .characters-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
+    gap: 75px; /* Збільшено від 30px до 40px, можеш експериментувати (наприклад, 50px, 60px) */
     max-width: 1200px;
     width: 100%;
     margin: 0 auto;
@@ -244,7 +229,7 @@ button {
 }
 
 .character-card {
-    background-color: var(--card-background);
+    background-color: var(--card-background); /* #ffffff */
     border-radius: var(--card-border-radius);
     overflow: hidden;
     display: flex;
@@ -254,7 +239,7 @@ button {
 }
 
 .character-card:hover {
-    transform: translateY(-10px);
+    transform: scale(1.05); /* Збільшення на 5% */
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
 }
 
@@ -270,7 +255,7 @@ button {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: var(--color-light);
+    color: #1F7AFF; /* Синій колір для тексту інформації про персонажа */
 }
 
 .character-name {
@@ -283,27 +268,28 @@ button {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #007bff;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
+    background: none;
+    border: none;
+    padding: 0;
+    width: auto;
+    height: auto;
     text-decoration: none;
-    transition: background-color 0.3s ease;
+    transition: none;
 }
 
 .character-link:hover {
-    background-color: #0056b3;
+    background: none;
 }
 
 .arrow-icon {
     width: 20px;
     height: 20px;
-    filter: invert(100%);
+    filter: brightness(0) saturate(100%) invert(20%) sepia(99%) saturate(4155%) hue-rotate(222deg) brightness(98%) contrast(101%); /* Колір #1F7AFF */
 }
 
 .more-characters-card {
-    background-color: #f0f0f0;
-    color: var(--color-neutral-900);
+    background-color: var(--card-background); /* #ffffff */
+    color: #1F7AFF; /* Змінено колір тексту на синій */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -312,15 +298,15 @@ button {
 }
 
 .more-characters-card .character-link {
-    background-color: #333;
+    background: none;
 }
 
 .more-characters-card .character-link:hover {
-    background-color: #555;
+    background: none;
 }
 
 .more-characters-card .arrow-icon {
-    filter: none;
+    filter: brightness(0) saturate(100%) invert(20%) sepia(99%) saturate(4155%) hue-rotate(222deg) brightness(98%) contrast(101%); /* Колір #1F7AFF */
 }
 
 .more-text {
@@ -334,19 +320,19 @@ button {
 @media (max-width: 992px) {
     .characters-grid {
         grid-template-columns: repeat(2, 1fr);
+        /* Можеш тут також змінити gap для менших екранів */
+        gap: 30px; /* Збільшено від 30px до 40px */
     }
 }
 
 @media (max-width: 768px) {
     .characters-grid {
         grid-template-columns: 1fr;
+        /* І тут також змінити gap для мобільних */
+        gap: 20px; /* Збільшено від 30px до 20px */
     }
     .section-title {
         font-size: 6vw;
-    }
-    .section-title::before,
-    .section-title::after {
-        width: 5vw;
     }
     .character-name {
         font-size: 4vw;
@@ -354,15 +340,15 @@ button {
     .more-text {
         font-size: 5vw;
     }
-    /* Залишаємо ці стилі для адаптивності навігації, враховуючи нові розміри */
+
     .main-nav {
-        padding: 15px 15px; /* Зменшення padding для мобільних, щоб 98% ширини було прийнятним */
-        width: calc(100% - 30px); /* Щоб компенсувати padding і не виходити за 98% */
+        padding: 15px 15px;
+        width: calc(100% - 30px);
     }
     .nav-logo img {
-        height: 60px; /* Зменшення розміру лого для мобільних */
+        height: 60px;
     }
     .icon-button img {
-        height: 40px; /* Зменшення розміру іконок для мобільних */
+        height: 40px;
     }
 }
