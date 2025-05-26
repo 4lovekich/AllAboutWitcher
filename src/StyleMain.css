@@ -1,6 +1,9 @@
+/* Підключення шрифтів краще робити тут, якщо вони використовуються по всьому сайту */
+@import url('https://fonts.googleapis.com/css2?family=Boldonse&family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;0,400;1,700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
 /* Основні стилі тіла сторінки */
 body {
-    background-color: var(--color-neutral-900);
+    background-color: rgb(23, 23, 23); /* Змінено колір фону тіла */
     color: var(--color-light);
     font-size: 1vw;
     margin: 0;
@@ -14,7 +17,7 @@ button {
 }
 
 :root {
-    --color-neutral-900: #181818;
+    --color-neutral-900: rgb(23, 23, 23); /* Змінено основну змінну для нейтрального фону */
     --color-light: #f0f0f0;
     --container-padding: 20px;
     --section-padding: 50px;
@@ -207,21 +210,31 @@ button {
 .section-title {
     font-family: 'Montserrat', sans-serif;
     font-size: 3.5vw;
-    font-weight: 600;
+    font-weight: 400;
     color: var(--color-light);
-    margin-bottom: 60px;
+    margin-bottom: 100px;
     text-align: center;
     position: relative;
     z-index: 60;
 }
 
-/* Видалені псевдоелементи ::before та ::after для .section-title, оскільки вони були причиною полосок */
+
+.map-section-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3.5vw;
+    font-weight: 400;
+    color: var(--color-light);
+    margin-bottom: 100px;
+    text-align: center;
+    position: relative;
+    z-index: 60;
+}
 
 
 .characters-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 75px; /* Збільшено від 30px до 40px, можеш експериментувати (наприклад, 50px, 60px) */
+    gap: 75px;
     max-width: 1200px;
     width: 100%;
     margin: 0 auto;
@@ -260,8 +273,8 @@ button {
 
 .character-name {
     margin: 0;
-    font-size: 1.5vw;
-    font-weight: 500;
+    font-size: 40px;
+    font-weight: 550;
 }
 
 .character-link {
@@ -282,8 +295,8 @@ button {
 }
 
 .arrow-icon {
-    width: 20px;
-    height: 20px;
+    width: 40px;
+    height: 40px;
     filter: brightness(0) saturate(100%) invert(20%) sepia(99%) saturate(4155%) hue-rotate(222deg) brightness(98%) contrast(101%); /* Колір #1F7AFF */
 }
 
@@ -316,23 +329,61 @@ button {
     padding: 0 20px;
 }
 
+/* Стилі для нового розділу карти */
+.map-section {
+    padding-top: var(--section-padding);
+    padding-bottom: var(--section-padding);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    z-index: 50;
+    background-color: var(--color-neutral-900);
+}
+
+.map-container {
+    max-width: 1200px; /* Максимальна ширина контейнера карти */
+    width: 100%;
+    border-radius: var(--card-border-radius); /* Заокруглені кути */
+    overflow: hidden; /* Обрізаємо все, що виходить за межі заокруглених кутів */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Тінь, як на картках персонажів */
+    margin: 0 auto; /* Центруємо */
+    position: relative; /* Для позиціонування зображення */
+}
+
+.map-image {
+    display: block; /* Прибирає зайві пробіли під зображенням */
+    width: 100%;
+    height: auto; /* Зберігає пропорції */
+    object-fit: cover;
+    border-radius: var(--card-border-radius); /* Заокруглені кути для самого зображення */
+}
+
+
 /* Медіа-запити для адаптивності */
 @media (max-width: 992px) {
     .characters-grid {
         grid-template-columns: repeat(2, 1fr);
-        /* Можеш тут також змінити gap для менших екранів */
-        gap: 30px; /* Збільшено від 30px до 40px */
+        gap: 40px; /* Зменшуємо gap для середніх екранів */
+    }
+    .section-title {
+        font-size: 5vw; /* Зменшуємо розмір заголовка */
+    }
+    .map-section-title {
+        font-size: 5vw; /* Зменшуємо розмір заголовка карти */
     }
 }
 
 @media (max-width: 768px) {
     .characters-grid {
         grid-template-columns: 1fr;
-        /* І тут також змінити gap для мобільних */
-        gap: 20px; /* Збільшено від 30px до 20px */
+        gap: 25px; /* Зменшуємо gap для мобільних */
     }
     .section-title {
         font-size: 6vw;
+    }
+    .map-section-title {
+        font-size: 6vw; /* Ще зменшуємо розмір заголовка карти */
     }
     .character-name {
         font-size: 4vw;
