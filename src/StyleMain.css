@@ -350,14 +350,14 @@ button {
 }
 
 .map-image {
-    display: block; /* Прибирає зайві пробіли під зображенням */
+    display: block; 
     width: 100%;
-    height: auto; /* Зберігає пропорції */
+    height: auto; 
     object-fit: cover;
     border-radius: var(--card-border-radius); /* Заокруглені кути для самого зображення */
 }
 
-/* НОВІ СТИЛІ для секції Міні ігри */
+
 .mini-games-section {
     padding-top: var(--section-padding);
     padding-bottom: var(--section-padding);
@@ -395,7 +395,7 @@ button {
     display: block;
     position: relative;
     width: 50%;
-    height: 400px;
+    height: 800px;
     overflow: hidden;
     border-radius: 0;
     box-shadow: none;
@@ -417,7 +417,7 @@ button {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0.8; /* Зменшуємо прозорість для кращої читабельності тексту, як на зображенні */
+    opacity: 0.8; 
     transition: opacity 0.3s ease;
 }
 
@@ -445,10 +445,10 @@ button {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.4);
     display: flex;
-    flex-direction: column; /* Змінено на column, щоб заголовок був по центру без стрілок */
-    justify-content: center; /* Центруємо заголовок вертикально */
-    align-items: center; /* Центруємо заголовок горизонтально */
-    padding: 0; /* Прибираємо padding, оскільки стрілок немає */
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    padding: 0; 
     z-index: 2;
     transition: background-color 0.3s ease;
 }
@@ -464,28 +464,10 @@ button {
     color: var(--color-light);
     text-align: center;
     margin: 0;
-    flex-grow: 0; /* Прибираємо flex-grow, щоб заголовок не розтягувався */
-    padding: 0; /* Прибираємо padding */
+    flex-grow: 0; 
+    padding: 0; 
 }
 
-/* Прибираємо стилі для стрілок, оскільки їх більше немає в HTML */
-/*
-.arrow-left, .arrow-right {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 4vw;
-    font-weight: 700;
-    color: var(--color-light);
-    opacity: 0.7;
-    transition: opacity 0.3s ease;
-}
-
-.mini-game-card:hover .arrow-left,
-.mini-game-card:hover .arrow-right {
-    opacity: 1;
-}
-*/
-
-/* Медіа-запити для адаптивності */
 @media (max-width: 992px) {
     .characters-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -549,4 +531,74 @@ button {
         font-size: 7vw;
     }
 
+}
+
+.footer {
+    color: #ffffff;
+    padding: 30px 30px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 18px;
+    margin-top: auto;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.footer .logo {
+    display: flex;
+    align-items: center;
+}
+
+.footer .logo img {
+    height: 80px;
+    margin-right: 20px;
+}
+
+.footer .logo span {
+    font-weight: 900;
+    font-size: 32px;
+}
+
+.footer nav {
+    margin-left: 600px;
+    display: flex;
+    align-items: center;
+}
+
+.footer nav a {
+    color: #ffffff;
+    text-decoration: none;
+    margin-right: 300px;
+    font-size: 32px;
+    font-weight: 300;
+    transition: color 0.3s ease;
+    white-space: nowrap;
+}
+
+.footer nav a:last-child {
+    margin-right: 0;
+}
+
+.footer nav a:hover {
+    color: #cccccc;
+}
+
+@media (max-width: 768px) {
+    .footer {
+        flex-direction: column;
+        text-align: center;
+    }
+    .footer .logo {
+        margin-bottom: 15px;
+        margin-right: 0;
+    }
+    .footer nav {
+        margin-left: 0;
+        flex-direction: column;
+    }
+    .footer nav a {
+        margin: 5px 0;
+        font-size: 16px;
+    }
 }
