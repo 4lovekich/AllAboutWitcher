@@ -1,0 +1,226 @@
+/* Ваш існуючий CSS */
+body {
+    background-color: rgb(23, 23, 23); /* Змінено колір фону тіла */
+    color: #ffffff; /* Змінено на білий для кращої читабельності тексту на темному фоні */
+    font-size: 16px; /* Встановив фіксований розмір шрифту, 1vw може бути замалим */
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    min-height: 100vh; /* Забезпечує, що body займає всю висоту вікна */
+    display: flex;
+    flex-direction: column; /* Для розміщення навігації та контенту по вертикалі */
+    align-items: center; /* Центруємо вміст по горизонталі */
+}
+
+/* Ваш існуючий CSS для навігації */
+.main-nav {
+    /* position: absolute;  Прибираємо absolute, щоб nav був частиною потоку сторінки */
+    top: 0;
+    left: 0;
+    width: 98%; /* Розширюємо на всю ширину */
+    max-width: 1200px; /* Обмежуємо ширину, щоб не було занадто широким */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 20px;
+    z-index: 100;
+    box-sizing: border-box; /* Враховуємо padding у ширині */
+}
+
+.nav-logo img {
+    height: 80px;
+    width: auto;
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 20px;
+}
+
+.icon-button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.icon-button img {
+    height: 60px;
+    width: auto;
+}
+
+/* Нові стилі для основного вмісту сторінки */
+.page-content {
+    display: flex; /* Використовуємо Flexbox для розділення на колонки */
+    width: 98%; /* Ширина контенту */
+    max-width: 1200px; /* Максимальна ширина контенту */
+    margin-top: 20px; /* Відступ від навігації */
+    gap: 20px; /* Відступ між колонками */
+    padding: 0 20px; /* Внутрішні відступи по боках */
+    box-sizing: border-box; /* Враховуємо padding у ширині */
+    flex-grow: 1; /* Дозволяє контенту займати доступний простір */
+}
+
+/* Стилі для лівої колонки (картки персонажа) */
+.character-card {
+    flex: 0 0 350px; /* Фіксована ширина 350px, не збільшується, не зменшується */
+    background-color: rgb(30, 30, 30); /* Темний фон для картки */
+    border-radius: 8px; /* Закруглені кути */
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #ffffff; /* Білий текст на картці */
+    height: fit-content; /* Висота по вмісту */
+}
+
+.character-name {
+    font-size: 2.2em;
+    font-weight: 900;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.character-portrait {
+    width: 100%;
+    max-width: 250px; /* Обмеження ширини портрету */
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.character-card section {
+    width: 100%;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.character-card section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.character-card h2 {
+    font-size: 1.2em;
+    font-weight: 700;
+    margin-bottom: 10px;
+    text-align: left;
+    width: 100%;
+}
+
+.character-card table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.character-card table td {
+    padding: 5px 0;
+    vertical-align: top;
+}
+
+.character-card table td:first-child {
+    font-weight: 700;
+    width: 35%; /* Ширина для заголовків таблиці */
+}
+
+.character-card table a {
+    color: #00aaff; /* Колір посилань */
+    text-decoration: none;
+}
+
+.character-card table a:hover {
+    text-decoration: underline;
+}
+
+.character-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.character-card ul li {
+    padding: 3px 0;
+}
+
+/* Стилі для правої колонки (опису персонажа) */
+.character-description {
+    flex-grow: 1; /* Права колонка займає весь доступний простір */
+    background-color: rgb(30, 30, 30); /* Темний фон для опису */
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    color: #ffffff;
+    line-height: 1.6;
+}
+
+.description-header {
+    font-style: italic;
+    font-size: 1.1em;
+    margin-bottom: 20px;
+    padding-left: 15px;
+    border-left: 3px solid #00aaff; /* Синя смужка, як на зображенні */
+}
+
+.character-description p {
+    margin-bottom: 15px;
+}
+
+.table-of-contents {
+    background-color: rgb(40, 40, 40); /* Трохи світліший фон для змісту */
+    border-radius: 5px;
+    padding: 20px;
+    margin-top: 30px;
+}
+
+.table-of-contents h3 {
+    font-size: 1.3em;
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #00aaff;
+}
+
+.table-of-contents ol {
+    padding-left: 20px;
+}
+
+.table-of-contents ul {
+    list-style: disc;
+    padding-left: 20px;
+}
+
+/* Адаптивність для менших екранів */
+@media (max-width: 768px) {
+    .main-nav {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 15px;
+    }
+    .nav-logo {
+        margin-bottom: 15px;
+    }
+    .nav-buttons {
+        width: 100%;
+        justify-content: flex-end;
+    }
+    .page-content {
+        flex-direction: column; /* Колонки стають стовпцями на мобільних */
+        padding: 15px;
+        margin-top: 15px;
+    }
+    .character-card {
+        flex: 0 0 auto; /* Знімаємо фіксовану ширину */
+        width: 100%; /* Займає всю ширину */
+    }
+    .character-portrait {
+        max-width: 200px; /* Зменшуємо портрет на мобільних */
+    }
+    .character-description {
+        padding: 20px;
+    }
+    body {
+        font-size: 14px; /* Зменшуємо базовий шрифт */
+    }
+}
