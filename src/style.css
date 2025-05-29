@@ -70,19 +70,25 @@ body {
 }
 
 .green-button {
-    background-color: #0F5011; 
-    color: rgb(239, 239, 239); 
+    background-color: #0F5011;
+    color: rgb(239, 239, 239);
     border: none;
-    padding: 30px 150px; 
-    font-size: 40px; /* Розмір тексту на кнопці */
-    font-weight: 550; /* Жирний текст на кнопці */
-    border-radius: 50px; /* Радіус заокруглення кнопки */
+    padding: 30px 150px;
+    font-size: 40px;
+    font-weight: 550;
+    border-radius: 50px;
     cursor: pointer;
     margin-top: 20px;
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; 
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+
+    /* Додаткові стилі для посилання, щоб воно поводилося як кнопка */
+    display: inline-block; /* Важливо: посилання за замовчуванням inline, що не дозволяє їм мати padding і width/height як блочним елементам */
+    text-decoration: none; /* Видаляємо підкреслення */
+    text-align: center; /* Центруємо текст, якщо посилання ширше тексту */
+    white-space: nowrap; /* Запобігає переносу тексту, якщо він довгий */
 }
 
 .green-button:hover {
-    transform: scale(1.05); 
-    background-color: #1a6a1c; 
+    transform: scale(1.05);
+    background-color: #1a6a1c;
 }
