@@ -1,40 +1,65 @@
-/* Ваш існуючий CSS */
+/* Змінні для кольорів */
+:root {
+    --bg-color: rgb(23, 23, 23);
+    --card-bg-color: rgba(30, 30, 30, 0.85); /* Напівпрозорий фон для карток */
+    --link-color: #00aaff; /* Колір посилань */
+    --text-color: #ffffff;
+    --border-color: rgba(255, 255, 255, 0.15); /* Трохи менш прозора лінія */
+    --header-link-color: #00aaff; /* Колір для посилань у заголовках, якщо потрібно окремо */
+}
+
 body {
-    background-color: rgb(23, 23, 23); /* Змінено колір фону тіла */
-    color: #ffffff; /* Змінено на білий для кращої читабельності тексту на темному фоні */
-    font-size: 16px; /* Встановив фіксований розмір шрифту, 1vw може бути замалим */
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-size: 18px; /* Збільшено базовий розмір шрифту для більшого інтерфейсу */
     margin: 0;
     padding: 0;
     font-family: 'Montserrat', sans-serif;
-    min-height: 100vh; /* Забезпечує, що body займає всю висоту вікна */
+    min-height: 100vh;
     display: flex;
-    flex-direction: column; /* Для розміщення навігації та контенту по вертикалі */
+    flex-direction: column; /* Головний контейнер для елементів по вертикалі */
     align-items: center; /* Центруємо вміст по горизонталі */
+
+    /* Оновлено для напівпрозорого фонового зображення */
+    background-image: 
+        linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), /* Це чорний напівпрозорий шар */
+        url('img/background.jpg'); /* Ваше фонове зображення */
+    background-size: cover; /* Розтягнути зображення, щоб покрити всю область */
+    background-position: center; /* Центрувати зображення */
+    background-attachment: fixed; /* Закріпити зображення, щоб воно не прокручувалось */
+    background-repeat: no-repeat;
+}
+
+/* Стилі для всіх гіперпосилань */
+a {
+    color: var(--link-color); /* Задаємо один колір для всіх посилань */
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
 }
 
 /* Ваш існуючий CSS для навігації */
 .main-nav {
-    /* position: absolute;  Прибираємо absolute, щоб nav був частиною потоку сторінки */
-    top: 0;
-    left: 0;
-    width: 98%; /* Розширюємо на всю ширину */
-    max-width: 1200px; /* Обмежуємо ширину, щоб не було занадто широким */
+    width: 98%;
+    max-width: 1400px; /* Збільшено максимальну ширину навігації */
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 20px;
+    padding: 25px 30px; /* Збільшено padding */
     z-index: 100;
-    box-sizing: border-box; /* Враховуємо padding у ширині */
+    box-sizing: border-box;
 }
 
 .nav-logo img {
-    height: 80px;
+    height: 90px; /* Збільшено розмір логотипу */
     width: auto;
 }
 
 .nav-buttons {
     display: flex;
-    gap: 20px;
+    gap: 25px; /* Збільшено відступ між кнопками */
 }
 
 .icon-button {
@@ -45,182 +70,448 @@ body {
 }
 
 .icon-button img {
-    height: 60px;
+    height: 70px; /* Збільшено розмір іконок */
     width: auto;
 }
 
-/* Нові стилі для основного вмісту сторінки */
+/* Нові/змінені стилі для основного вмісту сторінки */
 .page-content {
-    display: flex; /* Використовуємо Flexbox для розділення на колонки */
-    width: 98%; /* Ширина контенту */
-    max-width: 1200px; /* Максимальна ширина контенту */
-    margin-top: 20px; /* Відступ від навігації */
-    gap: 20px; /* Відступ між колонками */
-    padding: 0 20px; /* Внутрішні відступи по боках */
-    box-sizing: border-box; /* Враховуємо padding у ширині */
-    flex-grow: 1; /* Дозволяє контенту займати доступний простір */
+    display: flex;
+    width: 98%;
+    max-width: 1400px; /* Збільшено максимальну ширину контенту */
+    margin-top: 30px; /* Збільшено відступ від навігації */
+    gap: 30px; /* Збільшено відступ між колонками */
+    padding: 0 30px; /* Збільшено внутрішні відступи по боках */
+    box-sizing: border-box;
+    flex-grow: 1; /* Дозволяє page-content розтягуватися, щоб заповнити доступний простір */
+    align-items: flex-start; /* Вирівнюємо елементи зверху */
 }
 
 /* Стилі для лівої колонки (картки персонажа) */
 .character-card {
-    flex: 0 0 350px; /* Фіксована ширина 350px, не збільшується, не зменшується */
-    background-color: rgb(30, 30, 30); /* Темний фон для картки */
-    border-radius: 8px; /* Закруглені кути */
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    flex: 0 0 400px; /* Збільшено фіксовану ширину картки */
+    background-color: var(--card-bg-color); /* Напівпрозорий фон */
+    border-radius: 12px; /* Трохи більші закруглення */
+    padding: 0;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Більша тінь */
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: #ffffff; /* Білий текст на картці */
-    height: fit-content; /* Висота по вмісту */
+    color: var(--text-color);
+    height: fit-content; /* Дозволяє картці адаптуватись по висоті */
+    overflow: hidden;
 }
 
 .character-name {
-    font-size: 2.2em;
+    font-size: 2.5em; /* Збільшено розмір шрифту імені */
     font-weight: 900;
-    margin-bottom: 20px;
+    margin-top: 25px; /* Збільшено відступ зверху для імені */
+    margin-bottom: 25px;
     text-align: center;
+    width: 100%;
+    padding: 0 30px; /* Збільшено горизонтальний padding */
+    box-sizing: border-box;
 }
 
 .character-portrait {
     width: 100%;
-    max-width: 250px; /* Обмеження ширини портрету */
     height: auto;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-}
-
-.character-card section {
-    width: 100%;
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.character-card section:last-child {
-    border-bottom: none;
     margin-bottom: 0;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4); /* Більша тінь для портрета */
 }
 
-.character-card h2 {
-    font-size: 1.2em;
-    font-weight: 700;
-    margin-bottom: 10px;
-    text-align: left;
+/* Стилі для секцій інформації (Загальна інформація, Родина, Появи) */
+.info-section {
     width: 100%;
+    margin-bottom: 0;
+    padding: 0;
 }
 
-.character-card table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.character-card table td {
-    padding: 5px 0;
-    vertical-align: top;
-}
-
-.character-card table td:first-child {
+.section-title {
+    font-size: 1.6em; /* Збільшено розмір шрифту заголовків секцій */
     font-weight: 700;
-    width: 35%; /* Ширина для заголовків таблиці */
+    text-align: center;
+    margin: 25px 0 20px 0; /* Збільшено відступи */
+    width: 100%;
+    padding: 0 30px; /* Збільшено горизонтальний padding */
+    box-sizing: border-box;
 }
 
-.character-card table a {
-    color: #00aaff; /* Колір посилань */
-    text-decoration: none;
+/* Стилі для окремих характеристик (рядок з етикеткою та значенням) */
+.info-item {
+    display: flex;
+    padding: 12px 30px; /* Збільшено внутрішні відступи для кожного елемента */
+    border-top: 1px solid var(--border-color); /* Використано змінну */
+    box-sizing: border-box;
+    font-size: 1.05em; /* Трохи збільшено розмір шрифту в таблиці */
 }
 
-.character-card table a:hover {
-    text-decoration: underline;
+.info-item:last-of-type {
+    border-bottom: 1px solid var(--border-color); /* Використано змінну */
 }
 
-.character-card ul {
+.label {
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-right: 15px; /* Збільшено відступ */
+    color: var(--text-color);
+}
+
+.value {
+    flex-grow: 1;
+    text-align: right;
+    color: var(--text-color);
+}
+
+/* Стилі для маркованих списків всередині .info-item */
+.value-list {
     list-style: none;
     padding: 0;
     margin: 0;
+    text-align: right;
+    flex-grow: 1;
 }
 
-.character-card ul li {
-    padding: 3px 0;
+.value-list li {
+    position: relative;
+    padding-left: 20px; /* Збільшено відступ для маркера */
+    line-height: 1.4; /* Збільшено міжрядковий інтервал */
 }
 
-/* Стилі для правої колонки (опису персонажа) */
+.value-list li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--text-color);
+    font-size: 0.9em; /* Трохи більший маркер */
+    line-height: 1.4;
+}
+
+/* Стилі для першого блоку опису (короткий опис та зміст) */
 .character-description {
-    flex-grow: 1; /* Права колонка займає весь доступний простір */
-    background-color: rgb(30, 30, 30); /* Темний фон для опису */
-    border-radius: 8px;
-    padding: 30px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    color: #ffffff;
-    line-height: 1.6;
+    flex-grow: 1; /* Дозволяє цьому блоку займати доступний простір */
+    background-color: var(--card-bg-color); /* Напівпрозорий фон */
+    border-radius: 12px; /* Трохи більші закруглення */
+    padding: 40px; /* Збільшено padding */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    color: var(--text-color);
+    line-height: 1.7; /* Збільшено міжрядковий інтервал */
+    font-size: 1.05em; /* Трохи збільшено розмір шрифту */
+    height: fit-content; /* Дозволяє блоку адаптуватися по висоті */
 }
 
 .description-header {
     font-style: italic;
-    font-size: 1.1em;
-    margin-bottom: 20px;
-    padding-left: 15px;
-    border-left: 3px solid #00aaff; /* Синя смужка, як на зображенні */
+    font-size: 1.2em; /* Збільшено розмір шрифту */
+    margin-bottom: 25px; /* Збільшено відступ */
+    padding-left: 20px; /* Збільшено відступ */
+    border-left: 4px solid var(--link-color); /* Трохи товща лінія */
 }
 
 .character-description p {
-    margin-bottom: 15px;
+    margin-bottom: 20px; /* Збільшено відступ між абзацами */
 }
 
 .table-of-contents {
-    background-color: rgb(40, 40, 40); /* Трохи світліший фон для змісту */
-    border-radius: 5px;
-    padding: 20px;
-    margin-top: 30px;
+    background-color: rgba(40, 40, 40, 0.85); /* Напівпрозорий фон для змісту */
+    border-radius: 8px;
+    padding: 25px; /* Збільшено padding */
+    margin-top: 35px; /* Збільшено відступ */
 }
 
 .table-of-contents h3 {
-    font-size: 1.3em;
+    font-size: 1.4em; /* Збільшено розмір шрифту */
     margin-top: 0;
-    margin-bottom: 15px;
-    color: #00aaff;
+    margin-bottom: 18px; /* Збільшено відступ */
+    color: var(--link-color);
 }
 
 .table-of-contents ol {
-    padding-left: 20px;
+    padding-left: 25px; /* Збільшено відступ */
 }
 
 .table-of-contents ul {
     list-style: disc;
-    padding-left: 20px;
+    padding-left: 25px; /* Збільшено відступ */
 }
 
+/* Стилі для розширеного блоку опису */
+.extended-description {
+    width: 98%; /* Ширина, як у page-content */
+    max-width: 1400px; /* Максимальна ширина, як у page-content */
+    background-color: var(--card-bg-color); /* Напівпрозорий фон */
+    border-radius: 12px;
+    padding: 40px; /* Збільшено padding */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    color: var(--text-color);
+    line-height: 1.7;
+    font-size: 1.05em;
+    margin-top: 30px; /* Відступ від попереднього блоку */
+    /* margin-bottom: 30px; */ /* Знімаємо, щоб футер міг контролювати відступ */
+    box-sizing: border-box; /* Важливо для padding і width */
+}
+
+.extended-description-title {
+    font-size: 2em;
+    font-weight: 900;
+    margin-top: 0;
+    margin-bottom: 25px;
+    text-align: left;
+    color: var(--text-color);
+}
+
+.subsection-title {
+    font-size: 1.5em;
+    font-weight: 700;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    color: var(--text-color);
+}
+
+.extended-description p {
+    margin-bottom: 20px;
+    text-align: justify;
+}
+
+/* НОВІ СТИЛІ для блоку з трьома зображеннями */
+.gallery-container {
+    width: 98%;
+    max-width: 1400px;
+    display: flex;
+    justify-content: space-between; /* Розподіляє простір рівномірно */
+    gap: 20px; /* Відступ між зображеннями */
+    margin-top: 30px; /* Відступ від попереднього блоку */
+    padding: 0 30px; /* Відступи з боків, як у інших блоків */
+    box-sizing: border-box;
+}
+
+.gallery-image {
+    width: calc(33.333% - 13.333px); /* 100%/3 - (20px * 2 / 3) для gap */
+    height: auto; /* Зберігаємо пропорції */
+    object-fit: cover; /* Обрізає зображення, щоб заповнити простір */
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* СТИЛІ ДЛЯ ФУТЕРА */
+.footer {
+    color: #ffffff;
+    padding: 30px 30px;
+    display: flex;
+    justify-content: space-between; /* Змінено з flex-start для кращого розподілу */
+    align-items: center;
+    font-size: 18px;
+    margin-top: 50px; /* Збільшено відступ від верхнього контенту */
+    width: 100%; /* Футер на всю ширину */
+    max-width: 1400px; /* Обмежуємо його до макс. ширини контенту */
+    box-sizing: border-box;
+    flex-shrink: 0; /* Запобігає стисненню футера */
+    background-color: var(--card-bg-color); /* Додаємо фон для футера, якщо він без нього прозорий */
+    border-top-left-radius: 12px; /* Закруглені кути для футера */
+    border-top-right-radius: 12px;
+}
+
+.footer .logo {
+    display: flex;
+    align-items: center;
+}
+
+.footer .logo img {
+    height: 80px;
+    margin-right: 20px;
+}
+
+.footer .logo span {
+    font-weight: 900;
+    font-size: 32px;
+}
+
+.footer nav {
+    /* margin-left: 600px; */ /* Прибираємо фіксований margin-left для адаптивності */
+    display: flex;
+    align-items: center;
+    gap: 50px; /* Використовуємо gap замість фіксованого margin-right */
+}
+
+.footer nav a {
+    color: #ffffff;
+    text-decoration: none;
+    /* margin-right: 300px; */ /* Прибираємо фіксований margin-right */
+    font-size: 32px;
+    font-weight: 300;
+    transition: color 0.3s ease;
+    white-space: nowrap;
+}
+
+/* .footer nav a:last-child {
+    margin-right: 0;
+} */ /* Цей стиль більше не потрібен з використанням gap */
+
+.footer nav a:hover {
+    color: #cccccc;
+}
+
+
 /* Адаптивність для менших екранів */
-@media (max-width: 768px) {
-    .main-nav {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 15px;
+@media (max-width: 1200px) {
+    .main-nav, .page-content, .extended-description, .gallery-container, .footer {
+        max-width: 95%; /* Збільшуємо використання ширини на середніх екранах */
+        padding: 0 20px; /* Зменшуємо padding */
     }
-    .nav-logo {
-        margin-bottom: 15px;
+    .footer nav {
+        gap: 30px; /* Зменшуємо відступ у футері */
     }
-    .nav-buttons {
-        width: 100%;
-        justify-content: flex-end;
+    .footer nav a {
+        font-size: 28px; /* Зменшуємо шрифт посилань футера */
     }
+}
+
+@media (max-width: 992px) {
     .page-content {
-        flex-direction: column; /* Колонки стають стовпцями на мобільних */
-        padding: 15px;
-        margin-top: 15px;
+        flex-direction: column; /* Колонки стають одна під одною */
+        align-items: center; /* Центруємо блоки */
     }
     .character-card {
-        flex: 0 0 auto; /* Знімаємо фіксовану ширину */
-        width: 100%; /* Займає всю ширину */
-    }
-    .character-portrait {
-        max-width: 200px; /* Зменшуємо портрет на мобільних */
+        flex: none; /* Прибираємо фіксовану ширину */
+        width: 100%; /* Займає всю доступну ширину */
+        max-width: 500px; /* Обмежуємо картку на великих мобільних/планшетах */
     }
     .character-description {
-        padding: 20px;
+        width: 100%; /* Короткий опис теж на всю ширину */
     }
+    .gallery-container {
+        flex-wrap: wrap; /* Дозволяє зображенням переноситися на наступний рядок */
+        justify-content: center; /* Центруємо зображення */
+        gap: 15px; /* Зменшуємо відступ */
+    }
+    .gallery-image {
+        width: calc(50% - 10px); /* По два зображення в ряд на планшетах */
+    }
+    .footer {
+        flex-direction: column; /* Футер в стовпчик */
+        text-align: center;
+        padding: 20px 20px;
+    }
+    .footer .logo {
+        margin-bottom: 20px; /* Відступ від лого до навігації */
+    }
+    .footer nav {
+        margin-left: 0; /* Обнуляємо маржин */
+        flex-direction: column; /* Посилання футера в стовпчик */
+        gap: 15px; /* Відступ між посиланнями */
+    }
+    .footer nav a {
+        margin-right: 0; /* Обнуляємо маржин */
+        font-size: 24px; /* Зменшуємо шрифт посилань футера */
+    }
+}
+
+@media (max-width: 768px) {
     body {
-        font-size: 14px; /* Зменшуємо базовий шрифт */
+        font-size: 16px;
+    }
+    .main-nav {
+        padding: 15px 15px;
+        flex-direction: column; /* Навігація в стовпчик */
+        gap: 15px;
+    }
+    .nav-logo img {
+        height: 60px;
+    }
+    .nav-buttons {
+        gap: 15px;
+    }
+    .icon-button img {
+        height: 40px;
+    }
+    .page-content {
+        padding: 15px;
+        margin-top: 15px;
+        gap: 20px;
+    }
+    .character-card {
+        padding-top: 0;
+    }
+    .character-name {
+        font-size: 1.8em;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        padding: 0 15px;
+    }
+    .character-portrait {
+        max-width: 180px; /* Зменшуємо портрет на мобільних */
+    }
+    .info-item {
+        padding: 8px 15px;
+        font-size: 0.95em;
+    }
+    .section-title {
+        font-size: 1.2em;
+        margin: 15px 0 10px 0;
+        padding: 0 15px;
+    }
+    .character-description, .extended-description {
+        padding: 20px;
+        font-size: 0.95em;
+    }
+    .extended-description-title {
+        font-size: 1.6em;
+        margin-bottom: 20px;
+    }
+    .subsection-title {
+        font-size: 1.2em;
+        margin-top: 25px;
+        margin-bottom: 10px;
+    }
+    .description-header {
+        font-size: 1em;
+        margin-bottom: 15px;
+        padding-left: 10px;
+        border-left: 3px solid var(--link-color);
+    }
+    .table-of-contents {
+        padding: 15px;
+        margin-top: 20px;
+    }
+    .table-of-contents h3 {
+        font-size: 1.1em;
+        margin-bottom: 10px;
+    }
+    .gallery-container {
+        flex-direction: column; /* Зображення в стовпчик на мобільних */
+        align-items: center; /* Центруємо зображення */
+        gap: 10px;
+        padding: 0 15px;
+    }
+    .gallery-image {
+        width: 100%; /* Кожне зображення на всю ширину */
+        max-width: 300px; /* Обмежуємо ширину зображень для дуже вузьких екранів */
+    }
+    .footer {
+        padding: 15px 15px;
+        font-size: 16px;
+    }
+    .footer .logo img {
+        height: 60px;
+        margin-right: 15px;
+    }
+    .footer .logo span {
+        font-size: 24px;
+    }
+    .footer nav a {
+        font-size: 20px;
+    }
+}
+
+/* Медіа-запити для дрібних налаштувань */
+@media (max-width: 480px) {
+    .character-portrait {
+        max-width: 150px;
+    }
+    .footer .logo span {
+        font-size: 20px;
+    }
+    .footer nav a {
+        font-size: 18px;
     }
 }
