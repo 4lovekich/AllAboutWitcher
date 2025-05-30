@@ -1,24 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz</title>
+    <title>AllAboutWitcher</title>
     <link rel="stylesheet" href="styleQuiz.css">
+    <style>@import url('https://fonts.googleapis.com/css2?family=Boldonse&family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap'); </style>
 </head>
 <body>
-    <div class="quiz-container">
-        <div class="question-screen active">
-            <h1 class="question-number"></h1>
+    <div class="quiz-container active-scene" id="quiz-page">
+        <div class="question-screen"> <h1 class="question-number"></h1>
             <p class="question-text"></p>
             <div class="options-container"></div>
         </div>
-        <div class="results-screen">
-            <h2>Вікторина завершена!</h2>
-            <p>Ви набрали: <span id="score"></span> балів з <span id="total-questions"></span></p>
-            <button id="restart-quiz">Почати знову</button>
-        </div>
     </div>
+
+    <div class="page-container" id="final-page">
+        <header class="headerlogo">
+            <h1 class="header-title">10/10</h1>
+        </header>
+
+        <main class="main-content">
+            <section class="hero-section">
+                <div class="text-block">
+                    <h1>AllAboutWitcher</h1>
+                    <p>
+                        Ваш головний ресурс для дослідження неймовірного всесвіту
+                        Відьмака. Дізнайтесь все про персонажів, історію, лор та захопливі
+                        пригоди з книг, ігор та серіалів. Пориньте у цей світ разом із нами!
+                    </p>
+                    <button class="green-button" id="restart-quiz-from-final">Я З ВАМИ!</button>
+                </div>
+            </section>
+        </main>
+    </div>
+
     <script src="scriptQuiz.js"></script>
 </body>
 </html>

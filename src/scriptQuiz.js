@@ -32,7 +32,7 @@ const questions = [
     {
         question: "Як називається меч, який Геральт носить на спині?",
         options: ["Ластівка", "Ґвігір", "Арондит", "Немає постійної назви"],
-        correctAnswer: "Немає постійної назви" // В книгах у нього немає постійної назви, в іграх по-різному
+        correctAnswer: "Немає постійної назви"
     },
     {
         question: "Хто є королем Реданії?",
@@ -52,18 +52,31 @@ const questions = [
 ];
 
 let currentQuestionIndex = 0;
-let score = 0;
-let answeredQuestions = 0;
+let score = 0; // Бали все ще підраховуються, хоча не відображаються на фінальній сцені
 
-const questionScreen = document.querySelector('.question-screen');
-const resultsScreen = document.querySelector('.results-screen');
-const questionNumberElement = document.querySelector('.question-number');
-const questionTextElement = document.querySelector('.question-text');
-const optionsContainer = document.querySelector('.options-container');
-const scoreElement = document.getElementById('score');
-const totalQuestionsElement = document.getElementById('total-questions');
-const restartQuizButton = document.getElementById('restart-quiz');
+// Отримуємо посилання на всі сцени
+const quizPage = document.getElementById('quiz-page');
+const finalPage = document.getElementById('final-page'); // Перейменовано з landing-page
 
+// Елементи вікторини (в межах quizPage)
+const questionScreen = quizPage.querySelector('.question-screen');
+const questionNumberElement = quizPage.querySelector('.question-number');
+const questionTextElement = quizPage.querySelector('.question-text');
+const optionsContainer = quizPage.querySelector('.options-container');
+
+// Кнопка для переходу з Final Page на Quiz Page
+const restartQuizFromFinalButton = document.getElementById('restart-quiz-from-final');
+
+
+// Функція для показу певної сцени
+function showScene(sceneToShow) {
+    quizPage.classList.remove('active-scene');
+    finalPage.classList.remove('active-scene');
+
+    sceneToShow.classList.add('active-scene');
+}
+
+// Функція для завантаження питання
 function loadQuestion() {
     if (currentQuestionIndex < questions.length) {
         const currentQuestion = questions[currentQuestionIndex];
@@ -78,26 +91,30 @@ function loadQuestion() {
             optionElement.addEventListener('click', () => selectOption(optionElement, option, currentQuestion.correctAnswer));
             optionsContainer.appendChild(optionElement);
         });
-        questionScreen.classList.add('active');
-        resultsScreen.classList.remove('active');
+        showScene(quizPage); // Показуємо сцену вікторини
     } else {
-        showResults();
+        // Якщо питання закінчились, показуємо фінальну сцену
+        showScene(finalPage);
+        // Можна тут вивести на консоль для перевірки, скільки балів набрано
+        console.log(`Вікторина завершена! Ви набрали ${score} балів з ${questions.length}.`);
     }
 }
 
+// Функція вибору відповіді
 function selectOption(selectedOptionElement, selectedAnswer, correctAnswer) {
-    // Деактивуємо всі варіанти, щоб не можна було вибрати більше одного
+    // Видаляємо слухачів подій з усіх варіантів, щоб уникнути повторних кліків
     Array.from(optionsContainer.children).forEach(option => {
-        option.removeEventListener('click', () => {}); // Видаляємо слухача подій
-        option.classList.add('selected'); // Позначаємо вибраний
+        const newOption = option.cloneNode(true);
+        option.parentNode.replaceChild(newOption, option);
     });
+
+    selectedOptionElement.classList.add('selected');
 
     if (selectedAnswer === correctAnswer) {
         score++;
         selectedOptionElement.classList.add('correct');
     } else {
         selectedOptionElement.classList.add('incorrect');
-        // Показ правильної відповіді
         Array.from(optionsContainer.children).forEach(option => {
             if (option.textContent === correctAnswer) {
                 option.classList.add('correct');
@@ -105,30 +122,22 @@ function selectOption(selectedOptionElement, selectedAnswer, correctAnswer) {
         });
     }
 
-    answeredQuestions++;
-
-    // Перехід до наступного питання через деякий час
     setTimeout(() => {
         currentQuestionIndex++;
         loadQuestion();
     }, 1500); // 1.5 секунди
 }
 
-function showResults() {
-    questionScreen.classList.remove('active');
-    resultsScreen.classList.add('active');
-    scoreElement.textContent = score;
-    totalQuestionsElement.textContent = questions.length;
-}
 
-function restartQuiz() {
-    currentQuestionIndex = 0;
-    score = 0;
-    answeredQuestions = 0;
-    loadQuestion();
-}
+// Обробник подій для кнопки "Я З ВАМИ!" на фінальній сторінці
+restartQuizFromFinalButton.addEventListener('click', () => {
+    currentQuestionIndex = 0; // Скидаємо індекс питання
+    score = 0; // Скидаємо бали
+    loadQuestion(); // Завантажуємо перше питання вікторини
+});
 
-restartQuizButton.addEventListener('click', restartQuiz);
 
-// Завантажуємо перше питання при завантаженні сторінки
-document.addEventListener('DOMContentLoaded', loadQuestion);
+// Ініціалізація: показуємо сцену вікторини при завантаженні сторінки
+document.addEventListener('DOMContentLoaded', () => {
+    loadQuestion(); // Починаємо одразу з вікторини
+});

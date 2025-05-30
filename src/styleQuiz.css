@@ -1,13 +1,15 @@
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'Montserrat', sans-serif;
     background-color: rgb(23, 23, 23);
     color: white;
     display: flex;
-    justify-content: center;
+    justify-content: center; /* Центруємо основний контейнер */
     align-items: center;
     min-height: 100vh;
-    overflow: hidden; /* Щоб зображення не викликало прокрутки */
+    overflow: hidden;
+    padding: 20px; /* Додаємо невеликий загальний відступ */
+    box-sizing: border-box; /* Важливо для padding */
 }
 
 body::before {
@@ -17,29 +19,131 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('image_832934.png'); /* Замініть на ваше зображення */
+    background-image: url('image_832934.png'); /* Переконайтеся, що це правильний шлях */
     background-size: cover;
     background-position: center;
-    opacity: 0.5; /* 50% прозорість */
-    z-index: -1; /* Щоб фон був позаду вмісту */
+    opacity: 0.5;
+    z-index: -1;
 }
 
-.quiz-container {
-    background-color: rgba(0, 0, 0, 0.7); /* Напівпрозорий фон для контейнера вікторини */
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-    width: 90%;
-    max-width: 800px;
+/* Приховуємо всі сцени за замовчуванням */
+.page-container, .quiz-container { /* Тепер тільки ці два */
+    display: none;
+    width: 100%; /* Забезпечуємо, що вони займають всю доступну ширину */
+    max-width: 800px; /* Обмежуємо ширину для читабельності */
+}
+
+/* Відображаємо активну сцену */
+.active-scene {
+    display: flex; /* Flex для `page-container` */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Окремий стиль для quiz-container, коли він активний */
+.quiz-container.active-scene {
+    display: block; /* Quiz-container може бути блочним */
+    /* Забезпечуємо, що він все ще ліворуч, як було раніше */
+    margin-right: auto;
+    margin-left: initial; /* Скидаємо margin-left, якщо він був встановлений */
+    justify-content: flex-start; /* Для вирівнювання ліворуч */
+    align-items: flex-start;
+}
+
+/* --- Landing Page / Final Page Styles --- */
+.page-container {
+    max-width: 60%; /* Максимальна ширина основного контейнера, як ви вказали */
+    /* Ця сцена буде відцентрована за допомогою display: flex на active-scene */
+}
+
+.headerlogo {
+    margin-bottom: 60px;
+    text-align: center;
+}
+
+.logo {
+    max-width: 200px;
+    height: auto;
+}
+
+.main-content {
+    width: 100%;
+}
+
+.hero-section {
+    width: 100%;
+}
+
+.text-block {
+    background-color: rgb(94, 91, 91);
+    padding: 30px 35px;
+    border-radius: 25px;
+    text-align: center;
+    box-shadow: inset 0px 0px 15px 0px rgba(0, 0, 0, 0.65);
+    width: 100%;
     box-sizing: border-box;
 }
 
-.question-screen, .results-screen {
-    display: none;
+.text-block h1 {
+    color: rgb(239, 239, 239);
+    font-size: 60px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-weight: 500;
 }
 
-.question-screen.active {
-    display: block;
+.text-block p {
+    color: rgb(239, 239, 239);
+    font-size: 47px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    font-weight: 300;
+}
+
+.green-button {
+    background-color: #0F5011;
+    color: rgb(239, 239, 239);
+    border: none;
+    padding: 30px 150px;
+    font-size: 40px;
+    font-weight: 550;
+    border-radius: 50px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.green-button:hover {
+    transform: scale(1.05);
+    background-color: #1a6a1c;
+}
+
+
+/* --- Quiz Page Styles --- */
+.quiz-container {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;
+    /* Ці стилі для розміщення ліворуч */
+    margin-left: 5%; /* Відступ від лівого краю */
+    margin-right: auto; /* Дозволяє йому залишатись ліворуч */
+}
+
+.question-screen {
+    display: block; /* Завжди відображається всередині quiz-container */
+}
+
+.question-number {
+    font-size: 1.8em;
+    margin-bottom: 10px;
+    color: rgba(255, 255, 255, 0.8);
 }
 
 .question-text {
@@ -59,7 +163,7 @@ body::before {
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    border: 1px solid transparent; /* Додаємо рамку для візуалізації */
+    border: 1px solid transparent;
 }
 
 .option:hover {
@@ -68,42 +172,13 @@ body::before {
 
 .option.selected {
     background-color: rgba(255, 255, 255, 0.3);
-    border-color: #007bff; /* Колір рамки для обраного */
+    border-color: #007bff;
 }
 
 .option.correct {
-    background-color: #28a745; /* Зелений для правильної відповіді */
+    background-color: #28a745;
 }
 
 .option.incorrect {
-    background-color: #dc3545; /* Червоний для неправильної відповіді */
-}
-
-.results-screen {
-    text-align: center;
-}
-
-.results-screen h2 {
-    font-size: 2em;
-    margin-bottom: 20px;
-}
-
-.results-screen p {
-    font-size: 1.2em;
-    margin-bottom: 30px;
-}
-
-#restart-quiz {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 12px 25px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1em;
-    transition: background-color 0.3s ease;
-}
-
-#restart-quiz:hover {
-    background-color: #0056b3;
+    background-color: #dc3545;
 }
