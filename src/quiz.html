@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <link rel="stylesheet" href="styleQuiz.css">
+</head>
+<body>
+    <div class="quiz-container">
+        <div class="question-screen active">
+            <h1 class="question-number"></h1>
+            <p class="question-text"></p>
+            <div class="options-container"></div>
+        </div>
+        <div class="results-screen">
+            <h2>Вікторина завершена!</h2>
+            <p>Ви набрали: <span id="score"></span> балів з <span id="total-questions"></span></p>
+            <button id="restart-quiz">Почати знову</button>
+        </div>
+    </div>
+    <script src="scriptQuiz.js"></script>
+</body>
+</html>
