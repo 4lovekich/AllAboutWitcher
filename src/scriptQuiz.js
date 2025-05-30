@@ -52,27 +52,27 @@ const questions = [
 ];
 
 let currentQuestionIndex = 0;
-let score = 0; // Бали все ще підраховуються, хоча не відображаються на фінальній сцені
+let score = 0;
 
-// Отримуємо посилання на всі сцени
+// Отримуємо посилання на сцени з HTML
 const quizPage = document.getElementById('quiz-page');
-const finalPage = document.getElementById('final-page'); // Перейменовано з landing-page
+const finalPage = document.getElementById('final-page');
 
-// Елементи вікторини (в межах quizPage)
-const questionScreen = quizPage.querySelector('.question-screen');
+// Елементи вікторини
 const questionNumberElement = quizPage.querySelector('.question-number');
 const questionTextElement = quizPage.querySelector('.question-text');
 const optionsContainer = quizPage.querySelector('.options-container');
 
-// Кнопка для переходу з Final Page на Quiz Page
-const restartQuizFromFinalButton = document.getElementById('restart-quiz-from-final');
-
+// Елементи для фінальної сцени (вже існують в HTML)
+const scoreDisplayElement = finalPage.querySelector('.score-display');
+const resultTitleElement = finalPage.querySelector('.result-title');
+const resultMessageElement = finalPage.querySelector('.result-message');
+const goToMainButton = finalPage.querySelector('#go-to-main'); // Змінено назву змінної та ID кнопки
 
 // Функція для показу певної сцени
 function showScene(sceneToShow) {
     quizPage.classList.remove('active-scene');
     finalPage.classList.remove('active-scene');
-
     sceneToShow.classList.add('active-scene');
 }
 
@@ -82,62 +82,79 @@ function loadQuestion() {
         const currentQuestion = questions[currentQuestionIndex];
         questionNumberElement.textContent = `${currentQuestionIndex + 1}.`;
         questionTextElement.textContent = currentQuestion.question;
-        optionsContainer.innerHTML = ''; // Очищаємо попередні варіанти
 
-        currentQuestion.options.forEach(option => {
+        optionsContainer.innerHTML = '';
+        currentQuestion.options.forEach(optionText => {
             const optionElement = document.createElement('div');
             optionElement.classList.add('option');
-            optionElement.textContent = option;
-            optionElement.addEventListener('click', () => selectOption(optionElement, option, currentQuestion.correctAnswer));
+            optionElement.textContent = optionText;
+            optionElement.addEventListener('click', () => selectOption(optionElement, optionText, currentQuestion.correctAnswer));
             optionsContainer.appendChild(optionElement);
         });
-        showScene(quizPage); // Показуємо сцену вікторини
+
+        showScene(quizPage);
     } else {
-        // Якщо питання закінчились, показуємо фінальну сцену
-        showScene(finalPage);
-        // Можна тут вивести на консоль для перевірки, скільки балів набрано
-        console.log(`Вікторина завершена! Ви набрали ${score} балів з ${questions.length}.`);
+        showFinalPageWithResults();
     }
 }
 
 // Функція вибору відповіді
 function selectOption(selectedOptionElement, selectedAnswer, correctAnswer) {
-    // Видаляємо слухачів подій з усіх варіантів, щоб уникнути повторних кліків
     Array.from(optionsContainer.children).forEach(option => {
-        const newOption = option.cloneNode(true);
-        option.parentNode.replaceChild(newOption, option);
+        option.removeEventListener('click', () => {});
+        option.style.pointerEvents = 'none';
     });
-
-    selectedOptionElement.classList.add('selected');
 
     if (selectedAnswer === correctAnswer) {
         score++;
         selectedOptionElement.classList.add('correct');
     } else {
         selectedOptionElement.classList.add('incorrect');
-        Array.from(optionsContainer.children).forEach(option => {
-            if (option.textContent === correctAnswer) {
-                option.classList.add('correct');
-            }
-        });
     }
 
     setTimeout(() => {
         currentQuestionIndex++;
         loadQuestion();
-    }, 1500); // 1.5 секунди
+    }, 1500);
+}
+
+// Функція для відображення фінальної сторінки з результатами
+function showFinalPageWithResults() {
+    scoreDisplayElement.textContent = `${score} / ${questions.length}`;
+
+    let title = "";
+    let message = "";
+
+    const percentage = (score / questions.length) * 100;
+
+    if (percentage === 100) {
+        title = "Ви - Відьмак!";
+        message = "Вітаємо! Ваші знання про всесвіт Відьмака просто вражають! Здається, ви присвятили чимало часу вивченню монстрів, знаків та інтриг Північних Королівств. Така глибока обізнаність – це не що інше, як справжній дар. Можливо, у вас тече кров Старших, або ж ви просто народилися, щоб стати легендою. У будь-якому випадку, прийміть наші вітання – ви майже Відьмак!";
+    } else if (percentage >= 70) {
+        title = "Майже Відьмак!";
+        message = "Чудовий результат! Ваші знання про світ Відьмака дуже солідні. Ще трохи і ви зможете конкурувати з самим Геральтом! Продовжуйте вивчати легенди та таємниці.";
+    } else if (percentage >= 40) {
+        title = "Учень Відьмака";
+        message = "Непогано! Ви маєте базові знання про світ Відьмака, але є ще багато чого дізнатися. Не бійтеся досліджувати нові історії та персонажів!";
+    } else {
+        title = "Любитель пригод";
+        message = "Схоже, ви тільки починаєте свій шлях у світі Відьмака. Це чудово! Попереду безліч захоплюючих пригод та нових знань. Не засмучуйтесь, адже головне - це почати!";
+    }
+
+    resultTitleElement.textContent = title;
+    resultMessageElement.textContent = message;
+
+    showScene(finalPage);
 }
 
 
-// Обробник подій для кнопки "Я З ВАМИ!" на фінальній сторінці
-restartQuizFromFinalButton.addEventListener('click', () => {
-    currentQuestionIndex = 0; // Скидаємо індекс питання
-    score = 0; // Скидаємо бали
-    loadQuestion(); // Завантажуємо перше питання вікторини
+// ЗМІНА ТУТ: Обробник подій для кнопки "НА ГОЛОВНУ" тепер перенаправляє
+goToMainButton.addEventListener('click', () => {
+    window.location.href = 'main.html'; // Перенаправлення на main.html
 });
 
 
 // Ініціалізація: показуємо сцену вікторини при завантаженні сторінки
 document.addEventListener('DOMContentLoaded', () => {
-    loadQuestion(); // Починаємо одразу з вікторини
+    loadQuestion();
 });

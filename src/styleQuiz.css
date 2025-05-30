@@ -4,12 +4,12 @@ body {
     background-color: rgb(23, 23, 23);
     color: white;
     display: flex;
-    justify-content: center; /* Центруємо основний контейнер */
+    justify-content: center; /* Центруємо основний контейнер, якщо він активний */
     align-items: center;
     min-height: 100vh;
     overflow: hidden;
-    padding: 20px; /* Додаємо невеликий загальний відступ */
-    box-sizing: border-box; /* Важливо для padding */
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 body::before {
@@ -27,100 +27,26 @@ body::before {
 }
 
 /* Приховуємо всі сцени за замовчуванням */
-.page-container, .quiz-container { /* Тепер тільки ці два */
+.quiz-container, .results-screen {
     display: none;
-    width: 100%; /* Забезпечуємо, що вони займають всю доступну ширину */
+    width: 100%;
     max-width: 800px; /* Обмежуємо ширину для читабельності */
+    box-sizing: border-box; /* Враховуємо padding у ширині */
 }
 
-/* Відображаємо активну сцену */
+/* Клас, який додається до активної сцени */
 .active-scene {
-    display: flex; /* Flex для `page-container` */
+    display: flex; /* Використовуємо flex для центрування вмісту */
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-/* Окремий стиль для quiz-container, коли він активний */
+/* Окремі стилі для quiz-container, коли він активний, щоб він був ліворуч */
 .quiz-container.active-scene {
-    display: block; /* Quiz-container може бути блочним */
-    /* Забезпечуємо, що він все ще ліворуч, як було раніше */
-    margin-right: auto;
-    margin-left: initial; /* Скидаємо margin-left, якщо він був встановлений */
-    justify-content: flex-start; /* Для вирівнювання ліворуч */
-    align-items: flex-start;
-}
-
-/* --- Landing Page / Final Page Styles --- */
-.page-container {
-    max-width: 60%; /* Максимальна ширина основного контейнера, як ви вказали */
-    /* Ця сцена буде відцентрована за допомогою display: flex на active-scene */
-}
-
-.headerlogo {
-    margin-bottom: 60px;
-    text-align: center;
-}
-
-.logo {
-    max-width: 200px;
-    height: auto;
-}
-
-.main-content {
-    width: 100%;
-}
-
-.hero-section {
-    width: 100%;
-}
-
-.text-block {
-    background-color: rgb(94, 91, 91);
-    padding: 30px 35px;
-    border-radius: 25px;
-    text-align: center;
-    box-shadow: inset 0px 0px 15px 0px rgba(0, 0, 0, 0.65);
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.text-block h1 {
-    color: rgb(239, 239, 239);
-    font-size: 60px;
-    margin-top: 10px;
-    margin-bottom: 20px;
-    font-weight: 500;
-}
-
-.text-block p {
-    color: rgb(239, 239, 239);
-    font-size: 47px;
-    line-height: 1.6;
-    margin-bottom: 30px;
-    font-weight: 300;
-}
-
-.green-button {
-    background-color: #0F5011;
-    color: rgb(239, 239, 239);
-    border: none;
-    padding: 30px 150px;
-    font-size: 40px;
-    font-weight: 550;
-    border-radius: 50px;
-    cursor: pointer;
-    margin-top: 20px;
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    display: inline-block;
-    text-decoration: none;
-    text-align: center;
-    white-space: nowrap;
-}
-
-.green-button:hover {
-    transform: scale(1.05);
-    background-color: #1a6a1c;
+    display: block;
+    margin-left: 5%; /* Відступ від лівого краю */
+    margin-right: auto; /* Вирівнює вліво */
 }
 
 
@@ -130,14 +56,6 @@ body::before {
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-    box-sizing: border-box;
-    /* Ці стилі для розміщення ліворуч */
-    margin-left: 5%; /* Відступ від лівого краю */
-    margin-right: auto; /* Дозволяє йому залишатись ліворуч */
-}
-
-.question-screen {
-    display: block; /* Завжди відображається всередині quiz-container */
 }
 
 .question-number {
@@ -162,7 +80,7 @@ body::before {
     padding: 15px 20px;
     border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
     border: 1px solid transparent;
 }
 
@@ -170,15 +88,59 @@ body::before {
     background-color: rgba(255, 255, 255, 0.2);
 }
 
-.option.selected {
-    background-color: rgba(255, 255, 255, 0.3);
-    border-color: #007bff;
-}
-
 .option.correct {
     background-color: #28a745;
+    border-color: #28a745;
 }
 
 .option.incorrect {
     background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+/* --- Final Page (Results Screen) Styles --- */
+#final-page {
+    background-color: #552d5b;
+    padding: 60px 40px;
+    border-radius: 30px;
+    text-align: center;
+    max-width: 70%;
+    width: 90%;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+}
+
+#final-page .score-display {
+    font-size: 2.2em;
+    color: white;
+    margin-bottom: 30px;
+}
+
+#final-page .result-title {
+    font-size: 2.8em;
+    color: #ce87b7;
+    margin-bottom: 30px;
+}
+
+#final-page .result-message {
+    font-size: 1.5em;
+    line-height: 1.7;
+    color: #e0e0e0;
+    margin-bottom: 40px;
+}
+
+#final-page #go-to-main { /* Оновлено ID селектора */
+    background-color: #92207f;
+    color: white;
+    border: none;
+    padding: 20px 40px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1.3em;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+#final-page #go-to-main:hover { /* Оновлено ID селектора */
+    background-color: #7b1a6b;
+    transform: scale(1.05);
 }
